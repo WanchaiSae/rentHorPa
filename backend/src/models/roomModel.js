@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../configs/database.js";
 
 const Room = sequelize.define(
-  "room",
+  "rooms",
   {
     room_id: {
       type: DataTypes.INTEGER,
@@ -13,15 +13,17 @@ const Room = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    price: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-      defaultValue: 0.0,
-    },
-    staus: {
+    room_type: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0,
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     dorm_id: {
       type: DataTypes.INTEGER,
@@ -30,8 +32,8 @@ const Room = sequelize.define(
     },
   },
   {
+    freezeTableName: true,
     timestamps: false,
-    tableName: "rooms",
   }
 );
 
