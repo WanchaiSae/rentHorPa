@@ -546,7 +546,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="wQb7oZc5rFUF5NQ2vPXv" name="หน้า-2">
-    <mxGraphModel dx="570" dy="311" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="595" dy="326" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -557,10 +557,13 @@
           <mxGeometry height="30" width="160" y="26" as="geometry" />
         </mxCell>
         <mxCell id="bkkUS7-57LEQWILiDSGr-1" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;" value="room" vertex="1">
-          <mxGeometry height="56" width="160" x="210" y="100" as="geometry" />
+          <mxGeometry height="100" width="160" x="210" y="100" as="geometry" />
         </mxCell>
         <mxCell id="bkkUS7-57LEQWILiDSGr-2" parent="bkkUS7-57LEQWILiDSGr-1" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="- อ่าน,&amp;nbsp;เพิ่ม, ลบ, แก้ไข" vertex="1">
           <mxGeometry height="30" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="bkkUS7-57LEQWILiDSGr-3" parent="bkkUS7-57LEQWILiDSGr-1" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" value="- แสดงข้อมูลว่า ห้องนี้ มาจาก หอพักที่ตั้งไหน" vertex="1">
+          <mxGeometry height="44" width="160" y="56" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
