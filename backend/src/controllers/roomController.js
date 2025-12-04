@@ -55,7 +55,6 @@ export const getRoomById = async (req, res) => {
 export const createRoom = async (req, res) => {
   const { room_number, room_type, price, status, dorm_id } = req.body;
   // Logic to create a new room
-  console.log("body:", req.body);
   try {
     const newRoom = await Room.create({
       room_number,
@@ -74,18 +73,40 @@ export const createRoom = async (req, res) => {
   }
 };
 
-export const updateRoom = (req, res) => {
+export const updateRoom = async (req, res) => {
   const { id } = req.params;
   const { room_number, price, status, dorm_id } = req.body;
-  console.log(id);
-  console.log("body:", req.body);
+
   // Logic to update a room
-  return res.status(200).send(`Update room with ID: ${id}`);
+  try {
+    const room = await Room.findByPk(id);
+    if (!room) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+    await room.update({
+      room_number,
+      price,
+      status,
+      dorm_id,
+    });
+    return res
+      .status(200)
+      .json({ message: "Room updated successfully", data: room });
+  } catch (error) {
+    return res.status(500).json({ message: "Error updating room", error });
+  }
 };
 
-export const deleteRoom = (req, res) => {
+export const deleteRoom = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
-  // Logic to delete a room
-  return res.status(200).send(`Delete room with ID: ${id}`);
+  try {
+    const room = await Room.findByPk(id);
+    if (!room) {
+      return res.status(404).json({ message: "Room not found" });
+    }
+    await room.destroy();
+    return res.status(200).json({ message: "Room deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Error deleting room", error });
+  }
 };
