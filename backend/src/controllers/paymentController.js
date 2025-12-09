@@ -52,6 +52,7 @@ export const deletePayment = async (req, res) => {
     if (!paymentIdCheck) {
       return res.status(404).json({ message: "Payment ID Not found." });
     }
+    await paymentIdCheck.destroy();
     return res.status(200).json({
       message: "Payment Deleted Successfully.",
     });
