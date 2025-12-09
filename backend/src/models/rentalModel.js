@@ -9,14 +9,17 @@ const Rental = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
+    // วันที่เช่า
     start_date: {
       type: DataTypes.DATE,
       allowNull: false,
     },
+    // วันที่ย้ายออก
     end_date: {
       type: DataTypes.DATE,
       allowNull: false,
     },
+    // มัดจำ
     deposit: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -24,12 +27,10 @@ const Rental = sequelize.define(
     room_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      foreignKey: true,
     },
     customer_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      foreignKey: true,
     },
   },
   {
