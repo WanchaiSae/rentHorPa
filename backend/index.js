@@ -6,6 +6,7 @@ import sequelize from "./src/configs/database.js";
 import dormitoryRoutes from "./src/routes/dormitoryRoute.js";
 import roomRoutes from "./src/routes/roomRoute.js";
 import customerRoutes from "./src/routes/customerRoute.js";
+import paymentRoute from "./src/routes/paymentRoute.js";
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 app.use("/api/dormitories", dormitoryRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/customers", customerRoutes);
+app.use("/api/payment", paymentRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
