@@ -27,7 +27,6 @@ export const getRoomByDormitoryId = async (req, res) => {
         },
       ],
     });
-    console.log(rooms);
     return res.status(200).json({ data: rooms });
   } catch (error) {
     return res
