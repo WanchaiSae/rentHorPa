@@ -2,6 +2,8 @@ import Customer from "../customerModel.js";
 import Dormitory from "../dormitoryModel.js";
 import Rental from "../rentalModel.js";
 import Room from "../roomModel.js";
+import Bill from "../billModel.js";
+import Payment from "../paymentModel.js";
 
 // Define associations between models
 // Dormitory 1--* Room
@@ -17,4 +19,12 @@ Rental.belongsTo(Customer, { foreignKey: "customer_id", as: "customer" });
 Room.hasMany(Rental, { foreignKey: "room_id", as: "rentals" });
 Rental.belongsTo(Room, { foreignKey: "room_id", as: "room" });
 
-export { Dormitory, Room, Customer, Rental };
+// Rental 1--* Bill
+Rental.hasMany(Bill, { foreignKey: "rental_id", as: "bills" });
+Bill.belongsTo(Rental, { foreignKey: "rental_id", as: "rental" });
+
+// Bill 1--* Payment
+Bill.hasMany(Payment, { foreignKey: "bill_id", as: "payments" });
+Payment.belongsTo(Bill, { foreignKey: "bill_id", as: "bill" });
+
+export { Dormitory, Room, Customer, Rental, Payment, Bill };
