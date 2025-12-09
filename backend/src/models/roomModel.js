@@ -13,14 +13,17 @@ const Room = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    // ประเภทห้อง พัดลมหรือแอร์
     room_type: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    // ราคาเช่าห้องต่อเดือน
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    // สถานะห้อง ว่างหรือไม่ว่าง
     status: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -28,7 +31,6 @@ const Room = sequelize.define(
     dorm_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      foreignKey: true,
     },
   },
   {
