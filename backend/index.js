@@ -7,6 +7,7 @@ import dormitoryRoutes from "./src/routes/dormitoryRoute.js";
 import roomRoutes from "./src/routes/roomRoute.js";
 import customerRoutes from "./src/routes/customerRoute.js";
 import paymentRoute from "./src/routes/paymentRoute.js";
+import rentalRoute from "./src/routes/rentalRoute.js";
 
 const app = express();
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use("/api/dormitories", dormitoryRoutes);
 app.use("/api/rooms", roomRoutes);
 app.use("/api/customers", customerRoutes);
 app.use("/api/payment", paymentRoute);
+app.use("/api/rental", rentalRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
