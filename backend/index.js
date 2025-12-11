@@ -1,5 +1,6 @@
 import express from "express";
 import "dotenv/config";
+import cors from "cors";
 import sequelize from "./src/configs/database.js";
 
 // Import routes
@@ -10,6 +11,7 @@ import paymentRoute from "./src/routes/paymentRoute.js";
 import rentalRoute from "./src/routes/rentalRoute.js";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 const PORT = process.env.PORT || 3000;
 

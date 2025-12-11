@@ -3,6 +3,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { MdHomeWork } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { RiBillFill } from "react-icons/ri";
+import Customer from './customers/Customer';
 
 const Sidebar = () => {
   return (
@@ -18,7 +19,7 @@ const Sidebar = () => {
       </aside>
 
       <div className='flex-1 p-8 text-black'>
-        Content of the sidebar
+        <Customer />
       </div>
 
     </div>
