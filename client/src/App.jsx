@@ -1,9 +1,10 @@
 import React from 'react'
+import Navbar from './component/Navbar'
 
 const App = () => {
   return (
     <div>
-      <p className='text-2xl'>TEST TAILWIND CSS</p>
+      <Navbar />
     </div>
   )
 }
