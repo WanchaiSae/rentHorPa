@@ -1,26 +1,17 @@
 import React from 'react'
 import { FaEdit, FaTrash } from "react-icons/fa";
 
+import useCustomerStore from '../../store/customerStore';
+
 const Customer = () => {
 	// State
-	const [customers, setCustomers] = React.useState([]);
+	const { customers, fetchCustomers, deleteCustomer } = useCustomerStore();
 	const [searchTerm, setSearchTerm] = React.useState("");
 
 	// Fetch Data
 	React.useEffect(() => {
-		const fetchCustomers = async () => {
-			try {
-				const response = await fetch("http://localhost:5000/api/customers");
-				const result = await response.json();
-				if (result.data) {
-					setCustomers(result.data);
-				}
-			} catch (error) {
-				console.error("Error fetching customers:", error);
-			}
-		};
 		fetchCustomers();
-	}, []);
+	}, [fetchCustomers]);
 
 	const handleSearch = (e) => {
 		setSearchTerm(e.target.value);
@@ -70,7 +61,14 @@ const Customer = () => {
 										<button className="text-yellow-500 hover:text-yellow-700 text-lg transition duration-200 cursor-pointer">
 											<FaEdit />
 										</button>
-										<button className="text-red-500 hover:text-red-700 text-lg transition duration-200 cursor-pointer">
+										<button
+											className="text-red-500 hover:text-red-700 text-lg transition duration-200 cursor-pointer"
+											onClick={() => {
+												if (window.confirm('คุณต้องการลบข้อมูลลูกค้านี้ใช่หรือไม่?')) {
+													deleteCustomer(customer.customer_id);
+												}
+											}}
+										>
 											<FaTrash />
 										</button>
 									</td>
