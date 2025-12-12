@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Customer from './component/customers/Customer'
+import Sidebar from './component/Sidebar'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/customers',
-    element: <Customer />
+    element: <Sidebar children={<Customer />} />
   }
 ])
 
