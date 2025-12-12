@@ -26,6 +26,9 @@ const Customer = () => {
 	return (
 		<div className='p-5'>
 			<h1 className='text-2xl font-bold'>จัดการลูกค้า</h1>
+			<button className='bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200 shadow-md'>
+				+ เพิ่มลูกค้าใหม่
+			</button>
 			<hr className='border-gray-400 mt-5 mb-5' />
 			{/* Searching  */}
 			<form className='mb-5'>
