@@ -7,6 +7,7 @@ const Customer = () => {
 	// State
 	const { customers, fetchCustomers, deleteCustomer } = useCustomerStore();
 	const [searchTerm, setSearchTerm] = React.useState("");
+	const [isAddCustomer, setIsAddCustomer] = React.useState(false);
 
 	// Fetch Data
 	React.useEffect(() => {
@@ -23,12 +24,25 @@ const Customer = () => {
 		customer.phone.includes(searchTerm)
 	);
 
+	const hdlToggleBtn = () => {
+		setIsAddCustomer(!isAddCustomer);
+	}
+
 	return (
 		<div className='p-5'>
 			<h1 className='text-2xl font-bold'>จัดการลูกค้า</h1>
-			<button className='bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200 shadow-md'>
+			<button onClick={hdlToggleBtn} className='cursor-pointer bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200 shadow-md'>
 				+ เพิ่มลูกค้าใหม่
 			</button>
+			{isAddCustomer && (
+				<form className='mt-5'>
+					<input type="text" className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='ชื่อ' />
+					<input type="text" className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='นามสกุล' />
+					<input type="text" className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='เบอร์โทรศัพท์' />
+					<button onClick={hdlToggleBtn} className='cursor-pointer bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200 shadow-md'>เพิ่มลูกค้า</button>
+					<button onClick={hdlToggleBtn} className='cursor-pointer bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200 shadow-md'>ยกเลิก</button>
+				</form>
+			)}
 			<hr className='border-gray-400 mt-5 mb-5' />
 			{/* Searching  */}
 			<form className='mb-5'>
