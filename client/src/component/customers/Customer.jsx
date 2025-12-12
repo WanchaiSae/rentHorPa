@@ -1,13 +1,23 @@
 import React from 'react'
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
 
 import useCustomerStore from '../../store/customerStore';
 
 const Customer = () => {
 	// State
-	const { customers, fetchCustomers, deleteCustomer } = useCustomerStore();
+	const { customers, fetchCustomers, deleteCustomer, addCustomer } = useCustomerStore();
+	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = React.useState("");
 	const [isAddCustomer, setIsAddCustomer] = React.useState(false);
+	const [form, setForm] = React.useState({
+		first_name: "",
+		last_name: "",
+		phone: "",
+		email: "",
+		id_card: "",
+		line_id: "",
+	})
 
 	// Fetch Data
 	React.useEffect(() => {
@@ -28,6 +38,32 @@ const Customer = () => {
 		setIsAddCustomer(!isAddCustomer);
 	}
 
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+
+		setForm((prev) => ({
+			...prev,
+			[name]: value
+		}))
+
+
+	}
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		await addCustomer(form);
+		setIsAddCustomer(false);
+		setForm({
+			first_name: "",
+			last_name: "",
+			phone: "",
+			email: "",
+			id_card: "",
+			line_id: "",
+		})
+		fetchCustomers();
+	}
+
 	return (
 		<div className='p-5'>
 			<h1 className='text-2xl font-bold'>จัดการลูกค้า</h1>
@@ -36,10 +72,13 @@ const Customer = () => {
 			</button>
 			{isAddCustomer && (
 				<form className='mt-5'>
-					<input type="text" className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='ชื่อ' />
-					<input type="text" className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='นามสกุล' />
-					<input type="text" className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='เบอร์โทรศัพท์' />
-					<button onClick={hdlToggleBtn} className='cursor-pointer bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200 shadow-md'>เพิ่มลูกค้า</button>
+					<input onChange={handleChange} type="text" name='first_name' className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='ชื่อ' />
+					<input onChange={handleChange} type="text" name='last_name' className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='นามสกุล' />
+					<input onChange={handleChange} type="text" name='phone' className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='เบอร์โทรศัพท์' />
+					<input onChange={handleChange} type="text" name='email' className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='อีเมลื' />
+					<input onChange={handleChange} type="text" name='id_card' className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='เลขบัตร ปชช' />
+					<input onChange={handleChange} type="text" name='line_id' className='w-full p-2 border border-gray-400 rounded mb-2' placeholder='ไอดีไลน์' />
+					<button onClick={handleSubmit} className='cursor-pointer bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200 shadow-md'>เพิ่มลูกค้า</button>
 					<button onClick={hdlToggleBtn} className='cursor-pointer bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200 shadow-md'>ยกเลิก</button>
 				</form>
 			)}
@@ -69,7 +108,11 @@ const Customer = () => {
 					<tbody>
 						{filteredCustomers.length > 0 ? (
 							filteredCustomers.map((customer, index) => (
-								<tr key={customer.customer_id} className="border-b border-gray-200 hover:bg-gray-100 transition duration-200">
+								<tr
+									key={customer.customer_id}
+									onClick={() => navigate(`/customers/${customer.customer_id}`)}
+									className="cursor-pointer border-b border-gray-200 hover:bg-gray-100 transition duration-200"
+								>
 									<td className="py-4 px-6">{index + 1}</td>
 									<td className="py-4 px-6">{customer.first_name}</td>
 									<td className="py-4 px-6">{customer.last_name}</td>

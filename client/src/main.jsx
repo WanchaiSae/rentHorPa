@@ -5,6 +5,8 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Customer from './component/customers/Customer'
 import Sidebar from './component/Sidebar'
+import Detail from './component/customers/Detail'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -13,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: '/customers',
     element: <Sidebar children={<Customer />} />
+  },
+  {
+    path: '/customers/:id',
+    element: <Sidebar children={<Detail />} />
   }
 ])
 
