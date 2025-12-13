@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2025 at 05:44 PM
+-- Generation Time: Dec 13, 2025 at 10:25 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,6 +44,13 @@ CREATE TABLE `bill` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`bill_id`, `rental_id`, `billing_period`, `water_usage`, `water_rate`, `water_charge`, `electricity_start`, `electricity_end`, `electricity_rate`, `electricity_charge`, `other_charge`, `total_amount`, `due_date`, `status`) VALUES
+(1, 1, '2025-12-13', 1, 18, 18, 30, 100, 7, 490, 0, 4508, '2025-12-31', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -65,7 +72,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `first_name`, `last_name`, `phone`, `email`, `id_card`, `line_id`) VALUES
-(1, 'วันชัย', 'แซ่ลิ้ม', '0979645941', 'wanchai.sae@outlook.com', '1234567890123', 'rawixo');
+(1, 'วันชัย', 'แซ่ลิ้ม', '0979645941', 'wanchai.sae@outlook.com', '1234567890123', 'rawixo'),
+(2, 'ธัญญารัตน์', 'ทองหวาน', '0987973996', 'namkhangdsawda@hotmail.com', '1309902735407', 'namkhang');
 
 -- --------------------------------------------------------
 
@@ -116,6 +124,13 @@ CREATE TABLE `rental` (
   `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `rental`
+--
+
+INSERT INTO `rental` (`rental_id`, `start_date`, `end_date`, `deposit`, `room_id`, `customer_id`) VALUES
+(1, '2025-12-13', '2026-12-13', 4000, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -137,8 +152,9 @@ CREATE TABLE `rooms` (
 
 INSERT INTO `rooms` (`room_id`, `room_number`, `room_type`, `price`, `status`, `dorm_id`) VALUES
 (1, '101', 0, 4000, 0, 1),
-(2, '102', 0, 4000, 0, 1),
-(3, '103', 0, 4000, 0, 1);
+(2, '102', 0, 4000, 1, 1),
+(3, '103', 0, 4000, 1, 1),
+(5, '104', 1, 4000, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -193,13 +209,13 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `dormitory`
@@ -217,13 +233,13 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `rental`
 --
 ALTER TABLE `rental`
-  MODIFY `rental_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rental_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
