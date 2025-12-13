@@ -12,9 +12,9 @@ export const getPayments = async (req, res) => {
 };
 
 export const getPaymentById = async (req, res) => {
-  const { payment_id } = req.params.id;
+  const { id } = req.params;
   try {
-    const payment = await Payment.findByPk(payment_id);
+    const payment = await Payment.findByPk(id);
     if (!payment) {
       return res.status(404).json({ message: "Payment ID Not found." });
     }
@@ -33,8 +33,11 @@ export const createPayment = async (req, res) => {
     const newPayment = await Payment.create({
       amount,
       payment_type,
-      bill_id,
+      bill_id, // Ensure bill_id is passed and valid
     });
+
+    // Optional: Update bill status to 'Paid' (1) if needed, but keeping it simple for now or separate logic
+
     return res.status(201).json({
       data: newPayment,
     });
@@ -46,9 +49,9 @@ export const createPayment = async (req, res) => {
 };
 
 export const deletePayment = async (req, res) => {
-  const { payment_id } = req.params.id;
+  const { id } = req.params;
   try {
-    const paymentIdCheck = await Payment.findByPk(payment_id);
+    const paymentIdCheck = await Payment.findByPk(id);
     if (!paymentIdCheck) {
       return res.status(404).json({ message: "Payment ID Not found." });
     }

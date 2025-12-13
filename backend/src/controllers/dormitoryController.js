@@ -1,9 +1,16 @@
-import Dormitory from "../models/dormitoryModel.js";
+import { Dormitory, Room, Rental, Customer } from "../models/associations/associations.js";
 
 export const getDormitories = async (req, res) => {
   // Logic to retrieve and send a list of dormitories
   try {
-    const dormitories = await Dormitory.findAll();
+    const dormitories = await Dormitory.findAll({
+      include: [
+        {
+          model: Room,
+          as: "rooms",
+        },
+      ],
+    });
     return res.status(200).json({
       data: dormitories,
     });
@@ -16,7 +23,21 @@ export const getDormitoryById = async (req, res) => {
   const { id } = req.params;
   // Logic to retrieve and send a specific dormitory by ID
   try {
-    const dormitory = await Dormitory.findByPk(id);
+    const dormitory = await Dormitory.findByPk(id, {
+      include: [
+        {
+          model: Room,
+          as: "rooms",
+          include: [
+            {
+              model: Rental,
+              as: "rentals",
+              include: [{ model: Customer, as: "customer" }],
+            },
+          ],
+        },
+      ],
+    });
     if (!dormitory) {
       return res.status(404).send("Dormitory not found");
     }

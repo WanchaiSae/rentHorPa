@@ -2,12 +2,40 @@ import { Customer, Rental, Room } from "../models/associations/associations.js";
 
 export const getRentals = async (req, res) => {
   try {
-    const fetchRentals = await Rental.findAll();
+    const fetchRentals = await Rental.findAll({
+      include: [
+        { model: Room, as: "room" },
+        { model: Customer, as: "customer" },
+      ],
+    });
     return res.status(200).json({
       data: fetchRentals,
     });
   } catch (error) {
     return res.status(500).json({ message: "Error fetching Rentals", error });
+  }
+};
+
+export const createRental = async (req, res) => {
+  const { start_date, end_date, deposit, room_id, customer_id } = req.body;
+  try {
+    const newRental = await Rental.create({
+      start_date,
+      end_date,
+      deposit,
+      room_id,
+      customer_id,
+    });
+
+    // Update room status to occupied (0)
+    await Room.update({ status: 0 }, { where: { room_id } });
+
+    return res.status(201).json({
+      message: "Rental created successfully",
+      data: newRental,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Error creating Rental", error });
   }
 };
 
