@@ -1,4 +1,4 @@
-import { Customer } from "../models/associations/associations.js";
+import { Customer, Rental, Room, Dormitory } from "../models/associations/associations.js";
 
 export const getCustomers = async (req, res) => {
   try {
@@ -16,7 +16,20 @@ export const getCustomers = async (req, res) => {
 export const getCustomerById = async (req, res) => {
   const { id } = req.params;
   try {
-    const customer = await Customer.findByPk(id);
+    const customer = await Customer.findByPk(id, {
+      include: [{
+        model: Rental,
+        as: 'rentals',
+        include: [{
+          model: Room,
+          as: 'room',
+          include: [{
+            model: Dormitory,
+            as: 'dormitory'
+          }]
+        }]
+      }]
+    });
     if (customer) {
       return res.status(200).json({ data: customer });
     } else {
